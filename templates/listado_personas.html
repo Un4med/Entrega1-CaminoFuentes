@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>crear una persona</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Aquí podes crear Personas
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+   {% for persona in listado_personas %}
+   <li>{{perro}}</li>
+   {% endfor %}
+</p>
+{% endblock aparece_lista %}

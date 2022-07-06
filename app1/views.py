@@ -1,22 +1,37 @@
+from socketserver import _RequestType
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
+
+from .forms import FormPersona
 from .models import Persona
+from datetime import datetime
 
 # Create your views here.
 def vista(request):
     return render(request, 'index.html')
 
-def mi_lista(request):
+def crear_persona(request):
+
+    if request.method =="POST":
+        form= FormPersona(request.POST)
+        if form.is_valid():
+            data= form.cleaned_data 
+            fecha= data.get('fecha_creacion')
+            
+            persona1= Persona(
+                nombre=data.get('nombre'), 
+                edad=data.get('edad'), 
+                fecha_creacion= fecha if fecha else datetime.now() )
+            persona1.save()
+            
+            return render(request, 'listado_personas.html', {})
+        
+    else:
+         return render(request, 'crear_persona.html', {form})   
+        
+    form_persona= FormPersona()
     
-    #template= loader.get_template('index.html')
-    
-    modelo1= Persona(nombre= 'fasolita')
-    modelo2= Persona(nombre= 'rupestres')
-    modelo3= Persona(nombre= 'rucula')
-    modelo1.save()
-    modelo2.save()
-    modelo3.save()
-    
-    #render= template.render({'lista_objetos': [modelo1, modelo2, modelo3]})
-    return render(request, 'mi_template.html', {'lista_objetos': [modelo1, modelo2, modelo3]})
+    return render(request, 'crear_persona.html', {'form': form_persona})
+
+
