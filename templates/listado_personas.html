@@ -1,18 +1,35 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>crear una persona</title>
+<title>lista personas</title>
 {% endblock title %}
 {% block texto_header %}
 <h1>
-        Aquí podes crear Personas
+        Aquí podes ver a las Personas
 </h1>
 {% endblock texto_header %}   
 
 {% block aparece_lista %}
 <p>
-   {% for persona in listado_personas %}
-   <li>{{perro}}</li>
-   {% endfor %}
+        <a href={% url 'crear_persona'  %}> Crear Persona</a>
+</p>
+
+<p>
+        <form action= {% url 'listado_personas' %}>
+          {{form}}
+          <button>Buscar</button>
+        </form>
+</p>
+
+<p>
+        {% if listado_personas %}
+        <ul>
+        {% for persona in listado_personas %}
+                <li>{{persona}}</li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        No se encontraron datos.
+        {% endif %}
 </p>
 {% endblock aparece_lista %}
