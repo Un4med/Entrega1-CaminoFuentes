@@ -25,7 +25,11 @@
         {% if listado_personas %}
         <ul>
         {% for persona in listado_personas %}
-                <li>{{persona}}</li>
+                <li>{{persona}}
+                        <a href={% url 'mostrar_persona' persona.id %}> Mostrar</a>
+                        <a href={% url 'editar_persona' persona.id %}> Editar</a>
+                        <a href={% url 'eliminar_persona' persona.id %}> Eliminar</a>
+                </li>
         {% endfor %}
         </ul>
         {% else %}

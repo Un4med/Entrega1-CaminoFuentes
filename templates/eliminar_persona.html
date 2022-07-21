@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>eliminar persona</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Eliminar Personas
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+    <a href={% url 'listado_personas' %}>Volver</a>
+</p>
+<p>
+    <form action={% url 'eliminar_persona' object.id %} metod= "post"></form>
+    {% csrf_token %}
+    ¿Desea borrar a la persona?
+    <button> Confirmar</button>
+</p>
+{% endblock aparece_lista %}
