@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>crear un Dios</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Aquí podes crear Dioses
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+    <a href={% url 'listado_dioses' %}>Volver</a>
+</p>
+<p>
+    <form action={% url 'crear_dios' %} method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+         
+        </table>   
+        <button>Crear</button>
+    </form>
+</p>
+{% endblock aparece_lista %}

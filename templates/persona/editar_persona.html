@@ -14,13 +14,13 @@
     <a href={% url 'listado_personas' %}>Volver</a>
 </p>
 <p>
-    <form action={% url 'crear_persona' %} method="post">
+    <form action={% url 'editar_persona' persona.id %} method="post">
         {% csrf_token %}
         <table>
-            {{form.as_table}}
-         
+            {{form.as_table}} 
+            <button>Editar</button>
         </table>   
-        <button>editar</button>
+        
     </form>
 </p>
 {% endblock aparece_lista %}

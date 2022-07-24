@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Borrar</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Borrar
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+    <a href={% url 'listado_dioses' %}>Volver</a>
+</p>
+<p>
+    <form action={% url 'eliminar_dios' object.id %} method='post'>
+        {% csrf_token %}
+        Desea Eliminar este Dios?
+        <button>Confirmar</button>
+    </form>
+</p>
+{% endblock aparece_lista %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>El Olimpo</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Aquí podes ver a los Dioses
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+        <a href={% url 'crear_dios'  %}> Crear Dios</a>
+</p>
+
+
+<p>
+        {% if object_list %}
+        <ul>
+        {% for dios in object_list %}
+                <li>{{dios}}
+                        <a href={% url 'mostrar_dios' dios.id %}> Mostrar</a>
+                        <a href={% url 'editar_dios' dios.id %}> Editar</a>
+                        <a href={% url 'eliminar_dios' dios.id %}> Eliminar</a>
+                </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        No se encontraron datos.
+        {% endif %}
+</p>
+{% endblock aparece_lista %}

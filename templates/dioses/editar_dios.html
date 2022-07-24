@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>edita un Dios</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Vamos a editar Dioses
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+    <a href={% url 'listado_dioses' %}>Volver</a>
+</p>
+<p>
+    <form action={% url 'editar_dios' dios.id %} method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}} 
+            <button>Editar</button>
+        </table>   
+        
+    </form>
+</p>
+{% endblock aparece_lista %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>muestra un Dios</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Vamos a ver informacion de un Dios
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+    <a href={% url 'listado_dioses' %}>Volver</a>
+</p>
+<p>
+   <ul>
+        <li>
+            {{dios.dios}}
+        </li>
+        <li>
+            {{dios.edad}}
+        </li>
+        <li>
+            {{dios.fecha_creacion}}
+        </li>
+   </ul>
+</p>
+{% endblock aparece_lista %}
