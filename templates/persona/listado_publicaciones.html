@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>lista publicaciones</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Aquí podes ver a las publicaciones
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+        <a href={% url 'crear_publicacion'  %}> Crear publicaciones</a>
+</p>
+
+<p>
+        <form action= {% url 'listado_publicaciones' %}>
+          {{form}}
+          <button>Buscar</button>
+        </form>
+</p>
+
+<p>
+        {% if listado_publicaciones %}
+        <ul>
+        {% for publicaciones in listado_publicaciones %}
+                <li>
+                        {{publicaciones}}
+                        <a href={% url 'mostrar_publicaciones' publicaciones.id %}> Mostrar</a>
+                        <a href={% url 'editar_publicaciones' publicaciones.id %}> Editar</a>
+                        <a href={% url 'eliminar_publicaciones' publicaciones.id %}> Eliminar</a>
+                </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        No se encontraron datos.
+        {% endif %}
+</p>
+{% endblock aparece_lista %}

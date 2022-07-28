@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>edita una persona</title>
+<title>edita una publicaciones</title>
 {% endblock title %}
 {% block texto_header %}
 <h1>
-        Vamos a editar Personas
+        Vamos a editar publicaciones
 </h1>
 {% endblock texto_header %}   
 
 {% block aparece_lista %}
 <p>
-    <a href={% url 'listado_personas' %}>Volver</a>
+    <a href={% url 'listado_publicaciones' %}>Volver</a>
 </p>
 <p>
-    <form action={% url 'editar_persona' persona.id %} method="post">
+    <form action={% url 'editar_publicaciones' publicaciones.id %} method="post">
         {% csrf_token %}
         <table>
             {{form.as_table}} 

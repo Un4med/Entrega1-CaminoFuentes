@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
-from .forms import BusquedaPersona, FormPersona
-from .models import Persona
+from .forms import FormPublicacion, BusquedaPublicacion
+from .models import Publicaciones
 from datetime import datetime
 
 
@@ -11,79 +11,84 @@ def vista(request):
     return render(request, 'index.html')
 
 
-def crear_persona(request):
-    
-    
-    print(request.POST)
+def crear_publicaciones(request):
     
     if request.method =="POST":
-        form= FormPersona(request.POST)
+        form= FormPublicacion(request.POST)
         if form.is_valid():
             data= form.cleaned_data 
             fecha= data.get('fecha_creacion')
             
-            persona= Persona(
-                nombre=data.get('nombre'), 
-                edad=data.get('edad'), 
+            publicacion= Publicaciones(
+                titulo=data.get('titulo'), 
+                sub_titulo=data.get('sub_titulo'),
+                contenido=data.get('contenido'),
+                autor=data.get('autor'),
                 fecha_creacion= fecha if fecha else datetime.now() )
-            persona.save()
-            
-            listado_personas = Persona.objects.all()
-            return redirect('listado_personas')
+            publicacion.save()
+            return redirect('listado_publicaciones')
         
         else:
-            return render(request, 'persona/crear_persona.html', {'form':form})   
+            return render(request, 'persona/crear_publicacion.html', {'form':form})   
         
-    form_persona= FormPersona()
+    form_publicacion= FormPublicacion()
     
-    return render(request, 'persona/crear_persona.html', {'form': form_persona})
+    return render(request, 'persona/crear_publicacion.html', {'form': form_publicacion})
 
 
-def listado_persona(request):
-    nombre_de_persona= request.GET.get('nombre')
+def listado_publicaciones(request):
     
-    if nombre_de_persona: 
-        listado_personas= Persona.objects.filter(nombre__icontains= nombre_de_persona)
+    titulo_de_busqueda = request.GET.get('titulo')
+
+    if titulo_de_busqueda:
+        listado_publicaciones = Publicaciones.objects.filter(titulo__icontains=titulo_de_busqueda) 
     else:
-        listado_personas= Persona.objects.all()
-    
-    form= BusquedaPersona()
-    return render(request, 'persona/listado_personas.html', {'listado_personas': listado_personas,'form': form})
+        listado_publicaciones = Publicaciones.objects.all()
 
+    form = BusquedaPublicacion()
+    return render(request, 'persona/listado_publicaciones.html', {'listado_publicaciones': listado_publicaciones, 'form': form})
 
 @login_required
-def editar_persona(request, id):
-    persona1= Persona.objects.get(id=id)
+def editar_publicaciones(request, id):
+    publicaciones= Publicaciones.objects.get(id=id)
     
     if request.method == 'POST':
-        form= FormPersona(request.POST)
+        form= FormPublicacion(request.POST)
         if form.is_valid():
-            persona1.nombre = form.cleaned_data.get('nombre')
-            persona1.edad = form.cleaned_data.get('edad')
-            persona1.fecha_creacion = form.cleaned_data.get('fecha_creacion')
-            persona1.save()
+            publicaciones.titulo = form.cleaned_data.get('titulo')
+            publicaciones.sub_titulo = form.cleaned_data.get('sub_titulo')
+            publicaciones.contenido = form.cleaned_data.get('contenido')
+            publicaciones.autor = form.cleaned_data.get('autor')
+            publicaciones.fecha_creacion = form.cleaned_data.get('fecha_creacion')
+            publicaciones.save()
             
-            return redirect('listado_personas') 
+            return redirect('listado_publicaciones') 
           
         else:
-            return render(request, 'persona/editar_persona.html', {'form': form, 'persona': persona1})
+            return render(request, 'persona/editar_publicaciones.html', {'form': form, 'publicaciones': publicaciones})
     
-    form_persona= FormPersona(initial={'nombre': persona1.nombre , 
-                                       'edad': persona1.edad , 
-                                       'fecha_creacion': persona1.fecha_creacion }) 
+    form_publicacion= FormPublicacion(initial={'titulo': publicaciones.titulo, 
+                                       'sub_titulo': publicaciones.sub_titulo,
+                                       'contenido': publicaciones.contenido,
+                                       'autor': publicaciones.autor, 
+                                       'fecha_creacion': publicaciones.fecha_creacion }) 
     
-    return render(request, 'persona/editar_persona.html', {'form': form_persona,'persona': persona1 })
+    return render(request, 'persona/editar_publicaciones.html', {'form': form_publicacion,'publicaciones': publicaciones })
 
 
 @login_required
-def eliminar_persona(request, id):
-    persona1= Persona.objects.get(id=id)
-    persona1.delete() 
+def eliminar_publicaciones(request, id):
+    publicacion1= Publicaciones.objects.get(id=id)
+    publicacion1.delete() 
 
-    return redirect('listado_personas')
+    return redirect('listado_publicaciones')
 
 
-def mostrar_persona(request, id):
-    persona1= Persona.objects.get(id=id)
+def mostrar_publicaciones(request, id):
+    publicacion1= Publicaciones.objects.get(id=id)
     
-    return render(request, 'persona/mostrar_persona.html', {'persona':persona1}) 
+    return render(request, 'persona/mostrar_publicaciones.html', {'publicacion':publicacion1}) 
+
+
+def nosotros(request):
+    return render(request, 'nosotros.html', {})

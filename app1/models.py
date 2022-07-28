@@ -1,11 +1,13 @@
 from django.db import models
 
 # Create your models here.
-class Persona(models.Model):
-    nombre = models.CharField(max_length=30)
-    edad = models.IntegerField()
+class Publicaciones(models.Model):
+    titulo = models.CharField(max_length=250)
+    sub_titulo = models.CharField(max_length=250)
+    contenido = models.CharField(max_length=500)
+    autor = models.CharField(max_length=500)
     fecha_creacion= models.DateField(null=True)
     
     def __str__(self):
-        return f'hola, mi nombre es: {self.nombre}'
+        return f'{self.titulo} {self.titulo} {self. contenido}'
      

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Acercade</title>
+{% endblock title %}
+{% block texto_header %}
+<h1>
+        Acerca de Nosotros! 
+</h1>
+{% endblock texto_header %}   
+
+{% block aparece_lista %}
+<p>
+    <a href={% url 'index' %}>Volver</a>
+</p>
+<p>
+   Hola! 
+   Mi nombre es Ezequiel Camiño. Tengo 26 años, resido en el partido de Avellaneda. Me inscribí en este curso
+   para poder aprender más de python, no soy muy amante de crear páginas web's en este momento. Pero decidí 
+   hacerlo igual para no cerrarme y tener más conocimientos. Todo lo nuevo siempre es bienvenido.
+   Actualmente trabajo En NCR, en el sector de Help Desk para Carrefour. Y a futuro quiero entrar a trabajar 
+   como programador.
+</p>
+{% endblock aparece_lista %}

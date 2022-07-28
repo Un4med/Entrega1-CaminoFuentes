@@ -7,5 +7,5 @@ class Dios(models.Model):
     fecha_creacion= models.DateField(null=True)
     
     def __str__(self):
-        return f'hola, soy el dios es: {self.dios}'
+        return f'Hola, soy el dios: {self.dios}'
      

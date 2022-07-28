@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import crear_persona, vista, listado_persona, editar_persona, eliminar_persona, mostrar_persona
+from .views import crear_publicaciones, nosotros, vista, listado_publicaciones, editar_publicaciones, eliminar_publicaciones, mostrar_publicaciones
 #poner el INDEX HTML EN EL PATH VACIO
 
 urlpatterns = [
     path('', vista, name='index'),
-    path('crear-persona/', crear_persona, name='crear_persona'),
-    path('persona/', listado_persona, name='listado_personas'),
-    path('editar-persona/<int:id>', editar_persona , name='editar_persona'),
-    path('eliminar-persona/<int:id>', eliminar_persona, name='eliminar_persona'),
-    path('mostrar-persona/<int:id>', mostrar_persona , name='mostrar_persona')
+    path('nosotros/', nosotros, name='nosotros'),
+    path('crear-publicacion/', crear_publicaciones, name='crear_publicacion'),
+    path('publicaciones/', listado_publicaciones, name='listado_publicaciones'),
+    path('editar-publicaciones/<int:id>', editar_publicaciones , name='editar_publicaciones'),
+    path('eliminar-publicaciones/<int:id>', eliminar_publicaciones, name='eliminar_publicaciones'),
+    path('mostrar-publicaciones/<int:id>', mostrar_publicaciones , name='mostrar_publicaciones'),
 ]

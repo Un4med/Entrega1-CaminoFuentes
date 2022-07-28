@@ -1,9 +1,12 @@
 from django import forms
+from pkg_resources import require
 
-class FormPersona(forms.Form):
-    nombre= forms.CharField(max_length=30)
-    edad= forms.IntegerField()
-    fecha_creacion=forms.DateField(required=False)
+class FormPublicacion(forms.Form):
+    titulo = forms.CharField(max_length=250)
+    sub_titulo = forms.CharField(max_length=250)
+    contenido = forms.CharField(max_length=500)
+    autor = forms.CharField(max_length=500)
+    fecha_creacion= forms.DateField(required=False)
     
-class BusquedaPersona(forms.Form):
-    nombre = forms.CharField(max_length=30, required=False)
+class BusquedaPublicacion(forms.Form):
+    titulo = forms.CharField(max_length=250, required=False)
