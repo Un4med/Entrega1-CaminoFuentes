@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
-from .forms import FormPublicacion, BusquedaPublicacion
+from .forms import EditarPublicacion, FormPublicacion, BusquedaPublicacion
 from .models import Publicaciones
 from datetime import datetime
 
@@ -53,13 +53,14 @@ def editar_publicaciones(request, id):
     publicaciones= Publicaciones.objects.get(id=id)
     
     if request.method == 'POST':
-        form= FormPublicacion(request.POST)
+        form= FormPublicacion(request.POST, request.FILES)
         if form.is_valid():
             publicaciones.titulo = form.cleaned_data.get('titulo')
             publicaciones.sub_titulo = form.cleaned_data.get('sub_titulo')
             publicaciones.contenido = form.cleaned_data.get('contenido')
             publicaciones.autor = form.cleaned_data.get('autor')
             publicaciones.fecha_creacion = form.cleaned_data.get('fecha_creacion')
+            publicaciones.imagenes= form.cleaned_data.get('imagenes')
             publicaciones.save()
             
             return redirect('listado_publicaciones') 
@@ -70,6 +71,7 @@ def editar_publicaciones(request, id):
     form_publicacion= FormPublicacion(initial={'titulo': publicaciones.titulo, 
                                        'sub_titulo': publicaciones.sub_titulo,
                                        'contenido': publicaciones.contenido,
+                                       'iamgenes':publicaciones.imagenes,
                                        'autor': publicaciones.autor, 
                                        'fecha_creacion': publicaciones.fecha_creacion }) 
     

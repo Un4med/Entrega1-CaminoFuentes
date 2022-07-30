@@ -14,7 +14,7 @@
     <a href={% url 'listado_publicaciones' %}>Volver</a>
 </p>
 <p>
-    <form action={% url 'editar_publicaciones' publicaciones.id %} method="post">
+    <form action={% url 'editar_publicaciones' publicaciones.id %} method="post" enctype='multipart/form-data'>
         {% csrf_token %}
         <table>
             {{form.as_table}} 
