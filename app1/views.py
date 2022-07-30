@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
-from .forms import EditarPublicacion, FormPublicacion, BusquedaPublicacion
+from .forms import FormPublicacion, BusquedaPublicacion
 from .models import Publicaciones
 from datetime import datetime
 
@@ -10,7 +10,7 @@ from datetime import datetime
 def vista(request):
     return render(request, 'index.html')
 
-
+@login_required
 def crear_publicaciones(request):
     
     if request.method =="POST":
@@ -71,9 +71,9 @@ def editar_publicaciones(request, id):
     form_publicacion= FormPublicacion(initial={'titulo': publicaciones.titulo, 
                                        'sub_titulo': publicaciones.sub_titulo,
                                        'contenido': publicaciones.contenido,
-                                       'iamgenes':publicaciones.imagenes,
                                        'autor': publicaciones.autor, 
-                                       'fecha_creacion': publicaciones.fecha_creacion }) 
+                                       'fecha_creacion': publicaciones.fecha_creacion,
+                                       'imagenes':publicaciones.imagenes})
     
     return render(request, 'persona/editar_publicaciones.html', {'form': form_publicacion,'publicaciones': publicaciones })
 
@@ -86,10 +86,9 @@ def eliminar_publicaciones(request, id):
     return redirect('listado_publicaciones')
 
 
-def mostrar_publicaciones(request, id):
+def mostrar_publicaciones(request,id): 
     publicacion1= Publicaciones.objects.get(id=id)
-    
-    return render(request, 'persona/mostrar_publicaciones.html', {'publicacion':publicacion1}) 
+    return render(request, 'persona/mostrar_publicaciones.html', {'publicaciones': publicacion1}) 
 
 
 def nosotros(request):

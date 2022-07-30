@@ -25,9 +25,10 @@
             {{publicaciones.contenido}}
             
         </p>
-        
+        {% if publicaiones.imagenes %}
+        <img src={{publicaiones.imagenes.url}} alt="" height="200px">
+        {% endif %}
              {{publicaciones.autor}} {{publicaciones.fecha_creacion}} 
-        
    </ul>
 </p>
 {% endblock aparece_lista %}

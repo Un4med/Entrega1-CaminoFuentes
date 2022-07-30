@@ -8,6 +8,8 @@ class Publicaciones(models.Model):
     autor = models.CharField(max_length=500)
     fecha_creacion= models.DateField(null=True)
     imagenes= models.ImageField(upload_to='imagenes', null=True, blank= True)
+    
+    
     def __str__(self):
         return f'{self.titulo} {self.titulo} {self. contenido}'
      

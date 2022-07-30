@@ -28,7 +28,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('imagenes', models.ImageField(blank=True, null=True, upload_to='iamgenes')),
-                ('publicacion_imagen', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='app1.publicaciones')),
             ],
         ),
     ]
