@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'app1',
     'grupos',
     'accounts',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

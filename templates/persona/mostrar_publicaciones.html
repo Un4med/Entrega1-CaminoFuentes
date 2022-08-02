@@ -18,15 +18,15 @@
        <h1>
             {{publicaciones.titulo}}
         </h1>
-        <h4>
+        <h5>
             {{publicaciones.sub_titulo}}
-        </h4>
+        </h5>
         <p>
-            {{publicaciones.contenido}}
+            {{publicaciones.contenido | safe}}
             
         </p>
-        {% if publicaiones.imagenes %}
-        <img src={{publicaiones.imagenes.url}} alt="" height="200px">
+        {% if publicaciones.imagenes %}
+        <img src={{publicaciones.imagenes.url}} alt="" height="200px">
         {% endif %}
              {{publicaciones.autor}} {{publicaciones.fecha_creacion}} 
    </ul>

@@ -24,6 +24,7 @@ def crear_publicaciones(request):
                 sub_titulo=data.get('sub_titulo'),
                 contenido=data.get('contenido'),
                 autor=data.get('autor'),
+                imagenes=data.get('imagenes'),
                 fecha_creacion= fecha if fecha else datetime.now() )
             publicacion.save()
             return redirect('listado_publicaciones')
